@@ -1,0 +1,9 @@
+entite\Formation.class
+metier\ServiceIFormation.class
+jms\ecouteur.class
+metier\ServiceIFormation$listeEtats.class
+entite\Iformation.class
+entite\Planning.class
+metier\ServiceIFormationLocal.class
+table\InstanceTable.class
+entite\Formateur.class
