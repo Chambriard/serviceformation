@@ -5,8 +5,11 @@
  */
 package jms;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
@@ -26,7 +29,11 @@ public class ecouteur implements MessageListener {
     
     @Override
     public void onMessage(Message message) {
-        System.out.println(message.toString() + " BONJOUR CLAIRE BONJOUR JEROME");
+        try {
+            System.out.println(message.getBody(String.class));
+        } catch (JMSException ex) {
+            Logger.getLogger(ecouteur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
