@@ -1,0 +1,25 @@
+creerIFormation :
+	Nouvelle formation :
+	{
+		"idFormation" : "2",
+		"codeClient" : "333",
+		"numEffectif" : "40"
+	}
+
+	Ajouter une entreprise à une instance de formation existante (en_attente à en projet) :
+	{
+		"idFormation" : "0",
+		"codeClient" : "345",
+		"numEffectif" : "10"
+	}
+
+	Ajouter une entreprise à une instance de formation existante (en_projet à en planifiee):
+	{
+		"idFormation" : "2",
+		"codeClient" : "222",
+		"numEffectif" : "5"
+	}
+
+choixSalleIformation :
+
+http://localhost:8080/serviceFormation-web/webresources/iformation/choixSalleIForm?idIForm=1
