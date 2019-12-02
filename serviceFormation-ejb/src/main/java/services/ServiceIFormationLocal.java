@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package metier;
+package services;
 
 
 import entite.Formateur;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Claire
  */
 public interface ServiceIFormationLocal {
-    Iformation creerIFormation(int idFormation, int numEffectif, String codeClient);
+    Iformation creerIFormation(String content);
     String annulerIFormation(int idIFormation);
     String choixSalleIformation(int idIFormation);
     String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs);

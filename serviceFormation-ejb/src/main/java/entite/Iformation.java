@@ -13,14 +13,15 @@ import java.util.ArrayList;
  */
 public class Iformation {
 
-    private int idIFormation;
-    private int idFormation;
-    private int numEffectif;
+    private Integer idIFormation;
+    private Integer idFormation;
+    private Integer numEffectif;
     private ArrayList<String> codeClients;
-    private int idSalle;
+    private String codeClient;
+    private Integer idSalle;
     private String dateDeb;
     private String etat;
-    private int idFormateur;
+    private Integer idFormateur;
     /*
     * EN_ATTENTE : effectif demandé < à la moitié de la capacité minimale de la formation
     * EN_PROJET : effectif demandé >= à la moitié de la capacité minimale de la formation 
@@ -31,7 +32,15 @@ public class Iformation {
     public Iformation() {
     }
 
-    public Iformation(int idFormation, int idIFormation, int numEffectif, String codeClient, String etat) {
+    public Iformation(Integer idFormation, Integer numEffectif, String codeClient) {
+        this.idFormation = idFormation;
+        this.numEffectif = numEffectif;
+        this.codeClient = codeClient;  
+    }
+    
+    
+
+    public Iformation(Integer idFormation, Integer idIFormation, Integer numEffectif, String codeClient, String etat) {
         this.idFormation = idFormation;
         this.idIFormation = idIFormation;
         this.numEffectif = numEffectif;
@@ -40,7 +49,7 @@ public class Iformation {
         this.codeClients.add(codeClient);
     }
 
-    public Iformation(int idIFormation, int idFormation, int numEffectif, String codeClient, int idSalle, String dateDeb, String etat, int idFormateur) {
+    public Iformation(Integer idIFormation, Integer idFormation, Integer numEffectif, String codeClient, Integer idSalle, String dateDeb, String etat, Integer idFormateur) {
         this.idIFormation = idIFormation;
         this.idFormation = idFormation;
         this.numEffectif = numEffectif;
@@ -52,19 +61,19 @@ public class Iformation {
         this.idFormateur = idFormateur;
     }
 
-    public int getIdiformation() {
+    public Integer getIdiformation() {
         return idIFormation;
     }
 
-    public void setIdiformation(int idIFormation) {
+    public void setIdiformation(Integer idIFormation) {
         this.idIFormation = idIFormation;
     }
 
-    public int getIdformation() {
+    public Integer getIdformation() {
         return idFormation;
     }
 
-    public void setIdformation(int idFormation) {
+    public void setIdformation(Integer idFormation) {
         this.idFormation = idFormation;
     }
 
@@ -84,11 +93,11 @@ public class Iformation {
         this.codeClients = codeClient;
     }
 
-    public int getIdsalle() {
+    public Integer getIdsalle() {
         return idSalle;
     }
 
-    public void setIdsalle(int idSalle) {
+    public void setIdsalle(Integer idSalle) {
         this.idSalle = idSalle;
     }
 
@@ -100,20 +109,20 @@ public class Iformation {
         this.etat = etat;
     }
 
-    public int getIdformateur() {
+    public Integer getIdformateur() {
         return idFormateur;
     }
 
-    public void setIdformateur(int idFormateur) {
+    public void setIdformateur(Integer idFormateur) {
         this.idFormateur = idFormateur;
     }
 
    
-    public int getIdIFormation() {
+    public Integer getIdIFormation() {
         return idIFormation;
     }
 
-    public void setIdIFormation(int idIFormation) {
+    public void setIdIFormation(Integer idIFormation) {
         this.idIFormation = idIFormation;
     }
 
@@ -125,10 +134,22 @@ public class Iformation {
         this.dateDeb = dateDeb;
     }   
 
+    public String getCodeClientProvisoire() {
+        return codeClient;
+    }
+
+    public void setCodeClientProvisoire(String codeClient) {
+        this.codeClient = codeClient;
+    }
+
     @Override
     public String toString() {
         return "Iformation{" + "idIFormation=" + idIFormation + ", idFormation=" + idFormation + ", numEffectif=" + numEffectif + ", codeClients=" + codeClients + ", idSalle=" + idSalle + ", dateDeb=" + dateDeb + ", etat=" + etat + ", idFormateur=" + idFormateur + '}';
     }
+    
+    
+
+    
     
    
     
