@@ -7,7 +7,9 @@ package services;
 
 import entite.Formateur;
 import entite.Iformation;
+import entite.PlanningSalle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import metier.GestionIformationLocal;
@@ -36,8 +38,18 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     }
 
     @Override
-    public String choixSalleIformation(int idIFormation) {
-        return this.gestionIformation.choixSalleIformation(idIFormation);
+    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb) {
+        return this.gestionIformation.choixSalleIformation(idIformation, idSalle, dateDeb);
+    }
+    
+    @Override
+    public ArrayList<PlanningSalle> afficherPlanningSalles() {
+        return this.gestionIformation.afficherPlanningSalles();
+    }
+    
+    @Override
+    public String afficherPlanningFormateurs() {
+        return this.gestionIformation.afficherPlanningFormateurs();
     }
 
     @Override

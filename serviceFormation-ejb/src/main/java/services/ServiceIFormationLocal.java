@@ -8,15 +8,19 @@ package services;
 
 import entite.Formateur;
 import entite.Iformation;
+import entite.PlanningSalle;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Claire
  */
 public interface ServiceIFormationLocal {
-    Iformation creerIFormation(String content);
-    String annulerIFormation(int idIFormation);
-    String choixSalleIformation(int idIFormation);
-    String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs);
+    public Iformation creerIFormation(String content);
+    public String annulerIFormation(int idIFormation);
+    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb);
+    public String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs);
+    public ArrayList<PlanningSalle> afficherPlanningSalles();
+    public String afficherPlanningFormateurs();
 }

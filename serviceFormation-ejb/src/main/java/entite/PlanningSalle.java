@@ -10,8 +10,7 @@ package entite;
  * @author claire
  */
 public class PlanningSalle {
-
-   
+    
     private Integer idSalle;
     private Integer idFormation;
     private String statut;

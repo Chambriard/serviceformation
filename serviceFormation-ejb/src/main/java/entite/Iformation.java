@@ -144,7 +144,10 @@ public class Iformation {
 
     @Override
     public String toString() {
-        return "Iformation{" + "idIFormation=" + idIFormation + ", idFormation=" + idFormation + ", numEffectif=" + numEffectif + ", codeClients=" + codeClients + ", idSalle=" + idSalle + ", dateDeb=" + dateDeb + ", etat=" + etat + ", idFormateur=" + idFormateur + '}';
+        return "Iformation{" + "idIFormation:" + idIFormation + ", idFormation:" + 
+                idFormation + ", numEffectif:" + numEffectif + ", codeClients:" + 
+                codeClients + ", idSalle:" + idSalle + ", dateDeb:" + 
+                dateDeb + ", etat:" + etat + ", idFormateur:" + idFormateur + "}";
     }
     
     

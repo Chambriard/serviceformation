@@ -85,8 +85,22 @@ public class IformationResource {
     @Path("choixSalleIForm")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String choixSalleIformation(@QueryParam("idIForm") int idIForm) {
-        return this.gson.toJson(this.iform.choixSalleIformation(idIForm));
+    public String choixSalleIformation(@QueryParam("idIForm") int idIForm, @QueryParam("idSalle") int idSalle, @QueryParam("dateDeb") String dateDeb) {
+        return this.gson.toJson(this.iform.choixSalleIformation(idIForm, idSalle, dateDeb));
+    }
+    
+    @Path("afficherPlanningSalles")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherPlanningSalles() {
+        return this.gson.toJson(this.iform.afficherPlanningSalles());
+    }
+    
+    @Path("afficherPlanningFormateurs")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherPlanningFormateurs() {
+        return this.gson.toJson(this.iform.afficherPlanningFormateurs());
     }
     
     private ServiceIFormationLocal lookupServicesIFormationLocal() {

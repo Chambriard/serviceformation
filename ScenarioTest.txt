@@ -22,4 +22,6 @@ creerIFormation :
 
 choixSalleIformation :
 
-http://localhost:8080/serviceFormation-web/webresources/iformation/choixSalleIForm?idIForm=1
+/serviceFormation-web/webresources/iformation/choixSalleIForm?idIForm=0&idSalle=1&dateDeb=01/05/2019
+/serviceFormation-web/webresources/iformation/afficherPlanningSalles
+/servicePatrimoine-web/webresources/patrimoine/afficherSalle
