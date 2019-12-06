@@ -37,10 +37,10 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     public String annulerIFormation(int idIFormation) {
         return this.gestionIformation.annulerIFormation(idIFormation);
     }
-
+    
     @Override
-    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb) {
-        return this.gestionIformation.choixSalleIformation(idIformation, idSalle, dateDeb);
+    public String choixSalleIformation(String content) {
+        return this.gestionIformation.choixSalleIformation(content);
     }
     
     @Override
@@ -54,8 +54,8 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     }
     
     @Override
-    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb) {
-        return this.gestionIformation.choixFormateurIformation(idIformation, idFormateur, dateDeb);
+    public String choixFormateurIformation(String content) {
+        return this.gestionIformation.choixFormateurIformation(content);
     }
     
     @Override
@@ -66,8 +66,4 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     public HashMap<Integer, Formation> afficherFormations() {
         return this.gestionIformation.afficherFormations();
     }
-   
-   
-    
-   
 }

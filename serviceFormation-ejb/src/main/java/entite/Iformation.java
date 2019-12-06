@@ -31,6 +31,20 @@ public class Iformation {
         this.numEffectif = numEffectif;
         this.codeClient = codeClient;  
     }
+    
+    //constructeur pour choixSalleIformation
+    public Iformation(Integer idIFormation, String dateDeb, Integer idSalle) {
+        this.idIFormation = idIFormation;
+        this.idSalle = idSalle;
+        this.dateDeb = dateDeb;  
+    }
+    
+    //constructeur pour choixFormateurIformation
+    public Iformation(String dateDeb, Integer idIFormation, Integer idFormateur) {
+        this.idIFormation = idIFormation;
+        this.idFormateur = idFormateur;
+        this.dateDeb = dateDeb;  
+    }
  
     public Iformation(Integer idFormation, Integer idIFormation, Integer numEffectif, String codeClient, String etat) {
         this.idFormation = idFormation;

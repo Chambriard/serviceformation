@@ -20,8 +20,8 @@ import java.util.HashMap;
 public interface ServiceIFormationLocal {
     public String creerIFormation(String content);
     public String annulerIFormation(int idIFormation);
-    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb);
-    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb);
+    public String choixSalleIformation(String content);
+    public String choixFormateurIformation(String content);
     public ArrayList<PlanningSalle> afficherPlanningSalles();
     public ArrayList<PlanningFormateur> afficherPlanningFormateurs();
     public HashMap<Integer, Iformation> afficherInstances();

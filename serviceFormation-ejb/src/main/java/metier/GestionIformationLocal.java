@@ -22,8 +22,8 @@ public interface GestionIformationLocal {
     
     public String creerIFormation(String content);
     public String annulerIFormation(int idIformation);
-    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb);
-    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb);
+    public String choixFormateurIformation(String content);
+    public String choixSalleIformation(String content);
     public ArrayList<PlanningSalle> afficherPlanningSalles();
     public ArrayList<PlanningFormateur> afficherPlanningFormateurs();
     public HashMap<Integer, Iformation> afficherInstances();

@@ -86,8 +86,8 @@ public class IformationResource {
     @Path("choixSalleIForm")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String choixSalleIformation(@QueryParam("idIForm") int idIForm, @QueryParam("idSalle") int idSalle, @QueryParam("dateDeb") String dateDeb) {
-        return this.gson.toJson(this.iform.choixSalleIformation(idIForm, idSalle, dateDeb));
+    public String choixSalleIformation(String content) {
+        return this.gson.toJson(this.iform.choixSalleIformation(content));
     }
     
     @Path("afficherPlanningSalles")
@@ -96,13 +96,13 @@ public class IformationResource {
     public String afficherPlanningSalles() {
         return this.gson.toJson(this.iform.afficherPlanningSalles());
     }
-    
+
     
     @Path("choixFormateurIForm")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String choixFormateurIformation(@QueryParam("idIForm") int idIForm, @QueryParam("idFormateur") int idFormateur, @QueryParam("dateDeb") String dateDeb) {
-        return this.gson.toJson(this.iform.choixFormateurIformation(idIForm, idFormateur, dateDeb));
+    public String choixFormateurIformation(String content) {
+        return this.gson.toJson(this.iform.choixFormateurIformation(content));
     }
     
     @Path("afficherPlanningFormateurs")

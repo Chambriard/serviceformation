@@ -54,7 +54,7 @@ public class GestionIformation implements GestionIformationLocal {
         this.listeFormation = initListeFormation();
         this.listePlanningSalle = new ArrayList<>();
         this.listePlanningFormateur = new ArrayList<>();
-        this.lastid = 4;
+        this.lastid = 5;
         this.gson = new Gson();
     }
     
@@ -176,8 +176,7 @@ public class GestionIformation implements GestionIformationLocal {
     }
     
     
-    
-    private void ajouterFormateurPlan(PlanningFormateur plan) {
+    private String ajouterFormateurPlan(PlanningFormateur plan) {
         String res = null;
         try {
             HttpClient client = new DefaultHttpClient();
@@ -194,6 +193,7 @@ public class GestionIformation implements GestionIformationLocal {
         } catch (IOException ex) {
             Logger.getLogger(ServiceIFormation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return "Formateur ajoute au planning";
     }
 
     private String ajouterSallePlan(PlanningSalle plan) {
@@ -280,8 +280,13 @@ public class GestionIformation implements GestionIformationLocal {
         return res;
     }
     
+    
     @Override
-    public String choixSalleIformation(int idIformation, int idSalle, String dateDeb) {
+    public String choixSalleIformation(String content) {
+        Iformation formContent = this.gson.fromJson(content, Iformation.class);
+        int idSalle = formContent.getIdsalle();
+        int idIformation = formContent.getIdIFormation();
+        String dateDeb = formContent.getDateDeb();
         String res = "";
         boolean salleExiste = false;
         for(PlanningSalle p : this.listePlanningSalle) {
@@ -313,12 +318,12 @@ public class GestionIformation implements GestionIformationLocal {
                 if(iform.getEtat().equals(listeEtats.PLANIFIEE.name())) {
                     PlanningSalle planForm = new PlanningSalle(iform.getIdsalle(), 
                             iform.getIdformation(), "affecte", iform.getDateDeb(), formatter.format(dateFin));
-                    this.ajouterSallePlan(planForm);
+                    res = this.ajouterSallePlan(planForm);
                 }
                 else if(iform.getEtat().equals(listeEtats.EN_PROJET.name())) {
                     PlanningSalle planForm = new PlanningSalle(iform.getIdsalle(), 
                             iform.getIdformation(), "pressenti", iform.getDateDeb(), formatter.format(dateFin));
-                    this.ajouterSallePlan(planForm);
+                    res = this.ajouterSallePlan(planForm);
                 }
                 else {
                 //mise à jour du statut de la salle
@@ -360,8 +365,12 @@ public class GestionIformation implements GestionIformationLocal {
     }
     
     @Override
-    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb) {
+    public String choixFormateurIformation(String content) {
         String res = "";
+        Iformation formContent = this.gson.fromJson(content, Iformation.class);
+        int idFormateur = formContent.getIdformateur();
+        int idIformation = formContent.getIdIFormation();
+        String dateDeb = formContent.getDateDeb();
         boolean formateurExiste = false;
         for(PlanningFormateur p : this.listePlanningFormateur) {
             if(p.getIdForm()== idFormateur)
@@ -402,17 +411,13 @@ public class GestionIformation implements GestionIformationLocal {
                     if(iform.getEtat().equals(listeEtats.PLANIFIEE.name())) {
                         PlanningFormateur planForm = new PlanningFormateur(iform.getIdformateur(), 
                                 iform.getIdformation(), "affecte", iform.getDateDeb(), formatter.format(dateFin));
-                        this.ajouterFormateurPlan(planForm);
-                        res = "Formateur ajoute au planning";
+                        res = this.ajouterFormateurPlan(planForm);
                     }
                     else if(iform.getEtat().equals(listeEtats.EN_PROJET.name())) {
                         PlanningFormateur planForm = new PlanningFormateur(iform.getIdformateur(), 
                                 iform.getIdformation(), "pressenti", iform.getDateDeb(), formatter.format(dateFin));
-                        this.ajouterFormateurPlan(planForm);
-                        res = "Formateur ajoute au planning";
+                        res = this.ajouterFormateurPlan(planForm);
                     }
-
-
                 }
                 //si le formateur est dans le planning, on le met à jour
                 else {
@@ -427,6 +432,7 @@ public class GestionIformation implements GestionIformationLocal {
         }
         return res;
     } 
+    
     
     @Override
     public ArrayList<PlanningFormateur> afficherPlanningFormateurs() {
