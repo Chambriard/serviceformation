@@ -6,7 +6,8 @@
 package services;
 
 
-import entite.Formateur;
+import entite.Formation;
+import entite.PlanningFormateur;
 import entite.Iformation;
 import entite.PlanningSalle;
 import java.util.ArrayList;
@@ -17,10 +18,12 @@ import java.util.HashMap;
  * @author Claire
  */
 public interface ServiceIFormationLocal {
-    public Iformation creerIFormation(String content);
+    public String creerIFormation(String content);
     public String annulerIFormation(int idIFormation);
     public String choixSalleIformation(int idIformation, int idSalle, String dateDeb);
-    public String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs);
+    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb);
     public ArrayList<PlanningSalle> afficherPlanningSalles();
-    public String afficherPlanningFormateurs();
+    public ArrayList<PlanningFormateur> afficherPlanningFormateurs();
+    public HashMap<Integer, Iformation> afficherInstances();
+    public HashMap<Integer, Formation> afficherFormations();
 }

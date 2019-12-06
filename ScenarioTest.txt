@@ -21,7 +21,14 @@ creerIFormation :
 	}
 
 choixSalleIformation :
-
-/serviceFormation-web/webresources/iformation/choixSalleIForm?idIForm=0&idSalle=1&dateDeb=01/05/2019
 /serviceFormation-web/webresources/iformation/afficherPlanningSalles
+/serviceFormation-web/webresources/iformation/choixSalleIForm?idIForm=0&idSalle=1&dateDeb=01/05/2019
+
+choixFormateurIformation :
+/serviceFormation-web/webresources/iformation/afficherPlanningFormateurs
+/serviceFormation-web/webresources/iformation/choixFormateurIForm?idIForm=0&idFormateur=1&dateDeb=01/05/2019
+
 /servicePatrimoine-web/webresources/patrimoine/afficherSalle
+/servicePatrimoine-web/webresources/patrimoine/afficherFormateurs
+
+/serviceRessourceH-web/webresources/RH/afficherFormateurs

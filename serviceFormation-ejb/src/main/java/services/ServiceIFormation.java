@@ -5,7 +5,8 @@
  */
 package services;
 
-import entite.Formateur;
+import entite.Formation;
+import entite.PlanningFormateur;
 import entite.Iformation;
 import entite.PlanningSalle;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     }
 
     @Override
-    public Iformation creerIFormation(String content) {
+    public String creerIFormation(String content) {
         return this.gestionIformation.creerIFormation(content);
     
     }
@@ -48,14 +49,22 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     }
     
     @Override
-    public String afficherPlanningFormateurs() {
+    public ArrayList<PlanningFormateur> afficherPlanningFormateurs() {
         return this.gestionIformation.afficherPlanningFormateurs();
     }
-
+    
     @Override
-    public String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs) {
-        //return this.gestionIformation.choixFormateurIformation(idIFormation, listeFormateurs);
-        return "salut 4";
+    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb) {
+        return this.gestionIformation.choixFormateurIformation(idIformation, idFormateur, dateDeb);
+    }
+    
+    @Override
+    public HashMap<Integer, Iformation> afficherInstances() {
+        return this.gestionIformation.afficherInstances();
+    }
+    @Override
+    public HashMap<Integer, Formation> afficherFormations() {
+        return this.gestionIformation.afficherFormations();
     }
    
    

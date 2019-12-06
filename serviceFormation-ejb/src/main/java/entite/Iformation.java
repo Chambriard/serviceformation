@@ -21,13 +21,7 @@ public class Iformation {
     private Integer idSalle;
     private String dateDeb;
     private String etat;
-    private Integer idFormateur;
-    /*
-    * EN_ATTENTE : effectif demandé < à la moitié de la capacité minimale de la formation
-    * EN_PROJET : effectif demandé >= à la moitié de la capacité minimale de la formation 
-    *             et < à la capacité minimale de la formation
-    * PLANIFIEE : effectif demandé >= à la capacité minimale de la formation
-    */   
+    private Integer idFormateur;  
 
     public Iformation() {
     }
@@ -37,9 +31,7 @@ public class Iformation {
         this.numEffectif = numEffectif;
         this.codeClient = codeClient;  
     }
-    
-    
-
+ 
     public Iformation(Integer idFormation, Integer idIFormation, Integer numEffectif, String codeClient, String etat) {
         this.idFormation = idFormation;
         this.idIFormation = idIFormation;

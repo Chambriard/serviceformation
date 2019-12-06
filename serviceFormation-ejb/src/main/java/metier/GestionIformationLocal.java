@@ -5,7 +5,8 @@
  */
 package metier;
 
-import entite.Formateur;
+import entite.Formation;
+import entite.PlanningFormateur;
 import entite.Iformation;
 import entite.PlanningSalle;
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ import javax.ejb.Local;
 @Local
 public interface GestionIformationLocal {
     
-    public Iformation creerIFormation(String content);
+    public String creerIFormation(String content);
     public String annulerIFormation(int idIformation);
-    public String choixFormateurIformation(int idIFormation, ArrayList<Formateur> listeFormateurs);
+    public String choixFormateurIformation(int idIformation, int idFormateur, String dateDeb);
     public String choixSalleIformation(int idIformation, int idSalle, String dateDeb);
     public ArrayList<PlanningSalle> afficherPlanningSalles();
-    public String afficherPlanningFormateurs();
+    public ArrayList<PlanningFormateur> afficherPlanningFormateurs();
+    public HashMap<Integer, Iformation> afficherInstances();
+    public HashMap<Integer, Formation> afficherFormations();
     
 }

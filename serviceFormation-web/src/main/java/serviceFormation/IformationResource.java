@@ -80,6 +80,7 @@ public class IformationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String annulerIFormation(@QueryParam("idIForm") int idIForm) {
         return this.gson.toJson(this.iform.annulerIFormation(idIForm));
+        
     }
     
     @Path("choixSalleIForm")
@@ -96,11 +97,33 @@ public class IformationResource {
         return this.gson.toJson(this.iform.afficherPlanningSalles());
     }
     
+    
+    @Path("choixFormateurIForm")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String choixFormateurIformation(@QueryParam("idIForm") int idIForm, @QueryParam("idFormateur") int idFormateur, @QueryParam("dateDeb") String dateDeb) {
+        return this.gson.toJson(this.iform.choixFormateurIformation(idIForm, idFormateur, dateDeb));
+    }
+    
     @Path("afficherPlanningFormateurs")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String afficherPlanningFormateurs() {
         return this.gson.toJson(this.iform.afficherPlanningFormateurs());
+    }
+    
+    @Path("afficherInstances")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherInstances() {
+        return this.gson.toJson(this.iform.afficherInstances());
+    }
+    
+    @Path("afficherFormations")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String afficherFormations() {
+        return this.gson.toJson(this.iform.afficherFormations());
     }
     
     private ServiceIFormationLocal lookupServicesIFormationLocal() {
