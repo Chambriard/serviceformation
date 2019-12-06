@@ -6,6 +6,7 @@
 package services;
 
 
+import entite.CompteRendu;
 import entite.Formation;
 import entite.PlanningFormateur;
 import entite.Iformation;
@@ -26,4 +27,5 @@ public interface ServiceIFormationLocal {
     public ArrayList<PlanningFormateur> afficherPlanningFormateurs();
     public HashMap<Integer, Iformation> afficherInstances();
     public HashMap<Integer, Formation> afficherFormations();
+    public String envoyerCR(CompteRendu cr);
 }

@@ -1,6 +1,7 @@
 package metier;
 
 import com.google.gson.Gson;
+import entite.CompteRendu;
 import entite.PlanningFormateur;
 import entite.Formation;
 import entite.Iformation;
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -65,10 +67,10 @@ public class GestionIformation implements GestionIformationLocal {
     private HashMap<Integer, Iformation> initListeIformation(){
         HashMap<Integer, Iformation> newListeIformation = new HashMap<Integer, Iformation>();
         Iformation iform0 = new Iformation(0, 0, 5, "123", null, "05/01/2020", "EN_ATTENTE", null);
-        Iformation iform1 = new Iformation(1, 1, 12, "124", null, "07/12/2019", "EN_ATTENTE", null);
-        Iformation iform2 = new Iformation(2, 1, 20, "125", 2, "01/01/2020", "PLANIFIEE", 1);
-        Iformation iform3 = new Iformation(3, 2, 20, "126", 4, "25/10/2020", "PLANIFIEE", 4);
-        Iformation iform4 = new Iformation(4, 2, 11, "126", 3, "11/02/2020", "EN_PROJET", 2);
+        Iformation iform1 = new Iformation(1, 1, 12, "444", null, "07/12/2019", "EN_ATTENTE", null);
+        Iformation iform2 = new Iformation(2, 1, 20, "123", 2, "01/01/2020", "PLANIFIEE", 1);
+        Iformation iform3 = new Iformation(3, 2, 20, "123", 4, "25/10/2020", "PLANIFIEE", 4);
+        Iformation iform4 = new Iformation(4, 2, 11, "444", 3, "11/02/2020", "EN_PROJET", 2);
         newListeIformation.put(0, iform0);
         newListeIformation.put(1, iform1);
         newListeIformation.put(2, iform2);
@@ -215,6 +217,30 @@ public class GestionIformation implements GestionIformationLocal {
         return "Salle ajoutee au planning";
     }
     
+    
+    public void majEnvoisCR() {
+        for(Iformation i : this.listeIformation.values()) {
+            //si l'instance est plannifiée, et que le choix du formateur et de la salle a été effectué,
+            //on envoie un compte-rendu positif à l'entreprise
+            if(i.getEtat().equals(listeEtats.PLANIFIEE.name())) {
+                if(i.getIdformateur()!=null && i.getIdsalle()!=null) {
+                    Formation form = this.listeFormation.get(i.getIdIFormation());
+                    //String codeClient, int effectif, String dateDeb, String dateFin, String nomSalle, int montantTotal) 
+                    for(Map.Entry map : i.getListeCodesClient().entrySet()) {
+                        CompteRendu cr = new CompteRendu();
+                        cr.setCodeClient(map.getKey().toString());
+                        cr.setEffectif((int) map.getValue());
+                        cr.setDateDeb(i.getDateDeb());
+                        cr.setMontantTotal(form.getTarif()*(int) map.getValue());
+                        cr.setNomSalle(i.getIdsalle().toString());
+                        cr.setDateFin("");
+                        this.envoyerCR(cr);
+                    }                    
+                }
+            }
+        }
+    }
+    
     /*-------------------
     * Méthodes REST
     *--------------------*/
@@ -328,6 +354,7 @@ public class GestionIformation implements GestionIformationLocal {
                 //mise à jour du statut de la salle
                 res = this.majStatutSalle(iform.getIdformation(), idSalle, "pressenti", dateDeb, formatter.format(dateFin));
                 }
+                this.majEnvoisCR();
             }
             //le statut de la formation est en attente
             else {
@@ -349,7 +376,6 @@ public class GestionIformation implements GestionIformationLocal {
             HttpResponse response = client.execute(request);
             BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
             String line = rd.readLine();
-            PlanningSalle planningSalle;
             PlanningSalle[] liste = gson.fromJson(line, PlanningSalle[].class);
             this.listePlanningSalle.clear();
             for(PlanningSalle p : liste) {
@@ -417,11 +443,13 @@ public class GestionIformation implements GestionIformationLocal {
                                 iform.getIdformation(), "pressenti", iform.getDateDeb(), formatter.format(dateFin));
                         res = this.ajouterFormateurPlan(planForm);
                     }
+                    this.majEnvoisCR();
                 }
                 //si le formateur est dans le planning, on le met à jour
                 else {
                     //mise à jour du statut du formateur
                     res = this.majStatutFormateur(iform.getIdformation(), iform.getIdformateur(), "pressenti", dateDeb, formatter.format(dateFin));
+                    this.majEnvoisCR();
                 }
             }
             //le statut de la formation est en attente
@@ -465,6 +493,27 @@ public class GestionIformation implements GestionIformationLocal {
     @Override
     public HashMap<Integer, Formation> afficherFormations() {
         return this.listeFormation;
+    }
+    
+    @Override
+    public String envoyerCR(CompteRendu cr) {
+        String res = "";
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost request = new HttpPost("http://localhost:8080/serviceCommercial-web/webresources/commercial/CR");
+            StringEntity params = new StringEntity(this.gson.toJson(cr));
+            request.setHeader("Accept", "application/json");
+            request.setHeader("Content-type", "application/json");
+            request.setEntity(params);
+            HttpResponse response = client.execute(request); 
+            BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+            res = rd.readLine();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ServiceIFormation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ServiceIFormation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
     }
     
 }

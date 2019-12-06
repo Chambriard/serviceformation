@@ -5,6 +5,7 @@
  */
 package services;
 
+import entite.CompteRendu;
 import entite.Formation;
 import entite.PlanningFormateur;
 import entite.Iformation;
@@ -65,5 +66,10 @@ public class ServiceIFormation implements ServiceIFormationLocal{
     @Override
     public HashMap<Integer, Formation> afficherFormations() {
         return this.gestionIformation.afficherFormations();
+    }
+    
+    @Override
+    public String envoyerCR(CompteRendu cr) {
+        return this.gestionIformation.envoyerCR(cr);
     }
 }

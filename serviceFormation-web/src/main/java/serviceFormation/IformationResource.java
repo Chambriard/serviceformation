@@ -6,6 +6,7 @@
 package serviceFormation;
 
 import com.google.gson.Gson;
+import entite.CompteRendu;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -124,6 +125,14 @@ public class IformationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String afficherFormations() {
         return this.gson.toJson(this.iform.afficherFormations());
+    }
+    
+    @Path("envoyerCR")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String envoyerCR(CompteRendu cr) {
+        return this.gson.toJson(this.iform.envoyerCR(cr));
     }
     
     private ServiceIFormationLocal lookupServicesIFormationLocal() {
