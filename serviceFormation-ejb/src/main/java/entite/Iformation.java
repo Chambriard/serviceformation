@@ -6,6 +6,7 @@
 package entite;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Iformation {
     private Integer idIFormation;
     private Integer idFormation;
     private Integer numEffectif;
-    private ArrayList<String> codeClients;
+    private HashMap<String, Integer> listeCodesClient;
     private String codeClient;
     private Integer idSalle;
     private String dateDeb;
@@ -51,16 +52,16 @@ public class Iformation {
         this.idIFormation = idIFormation;
         this.numEffectif = numEffectif;
         this.etat = etat;
-        this.codeClients = new ArrayList<String>();
-        this.codeClients.add(codeClient);
+        this.listeCodesClient = new HashMap<>();
+        this.listeCodesClient.put(codeClient, numEffectif);
     }
 
     public Iformation(Integer idIFormation, Integer idFormation, Integer numEffectif, String codeClient, Integer idSalle, String dateDeb, String etat, Integer idFormateur) {
         this.idIFormation = idIFormation;
         this.idFormation = idFormation;
         this.numEffectif = numEffectif;
-        this.codeClients = new ArrayList<String>();
-        this.codeClients.add(codeClient);
+        this.listeCodesClient = new HashMap<>();
+        this.listeCodesClient.put(codeClient, numEffectif);
         this.idSalle = idSalle;
         this.dateDeb = dateDeb;
         this.etat = etat;
@@ -91,13 +92,14 @@ public class Iformation {
         this.numEffectif = numEffectif;
     }
 
-    public ArrayList<String> getCodeclient() {
-        return codeClients;
+    public HashMap<String, Integer> getListeCodesClient() {
+        return listeCodesClient;
     }
 
-    public void setCodeclient(ArrayList<String> codeClient) {
-        this.codeClients = codeClient;
+    public void setListeCodesClient(HashMap<String, Integer> listeCodesClient) {
+        this.listeCodesClient = listeCodesClient;
     }
+
 
     public Integer getIdsalle() {
         return idSalle;
@@ -148,13 +150,25 @@ public class Iformation {
         this.codeClient = codeClient;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Iformation{" + "idIFormation:" + idIFormation + ", idFormation:" + 
                 idFormation + ", numEffectif:" + numEffectif + ", codeClients:" + 
                 codeClients + ", idSalle:" + idSalle + ", dateDeb:" + 
                 dateDeb + ", etat:" + etat + ", idFormateur:" + idFormateur + "}";
+    }*/
+
+    @Override
+    public String toString() {
+        return "Iformation{" + "idIFormation=" + idIFormation + 
+                ", idFormation=" + idFormation + ", numEffectif=" + numEffectif + 
+                ", listeCodesClient=" + listeCodesClient + 
+                ", idSalle=" + idSalle + ", dateDeb=" + dateDeb + ", etat=" + etat + 
+                ", idFormateur=" + idFormateur + '}';
     }
+    
+    
+    
     
     
 

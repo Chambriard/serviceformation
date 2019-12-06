@@ -239,10 +239,10 @@ public class GestionIformation implements GestionIformationLocal {
                     if(nouvelEffectif <= form.getCapMax()) {    
                         instance.setNumeffectif(nouvelEffectif); 
                         instance.setEtat(calculEtatIform(form, nouvelEffectif));
-                        instance.getCodeclient().add(codeClient);
+                        instance.getListeCodesClient().put(codeClient, effectif);
                         existe = true;
                         newIform = instance;
-                        res = newIform.toString();
+                        res = "Instance de Formation créée";
                     }
                 }
             }
@@ -257,7 +257,6 @@ public class GestionIformation implements GestionIformationLocal {
         else {
             res = "Formation inexistante";
         }
-        
         return res;
     }
     
